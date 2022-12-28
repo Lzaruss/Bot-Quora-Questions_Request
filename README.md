@@ -16,3 +16,10 @@ It also has a function called add_question() that adds a new question to the ask
 
 # EXAMPLE
 
+
+
+https://user-images.githubusercontent.com/104428151/209848955-bebcec89-db29-44aa-9762-60e73273ff5e.mp4
+
+
+
+https://user-images.githubusercontent.com/104428151/209850939-02fbb605-9e55-4d1e-a1c1-3e736e3fa229.mp4
