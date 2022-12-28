@@ -2,7 +2,7 @@
 Simple bot that get all questions of a Quora User, then make some request to that questions
 
 
-# DESC
+# DESCRIPTION
 
 This script is a scraper that connects to a user's Quora page and collects all the questions that the user has made.
 
