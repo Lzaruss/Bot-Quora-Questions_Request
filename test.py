@@ -7,7 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser(add_help=False, description="Write -f or --func ['req', 'send'] to change the use of the script")
 parser.add_argument('-f', '--func', type=str, choices=['req', 'send'], required=True, help="Option to know if you want to collect questions(req) or send requests(send)")
-parser.add_argument('-n', '--num', type=int, required=False, help="Number of questions you want for the script(if you dont say any number, in defect will be 10)\nIn case of option req you must put a longer number if you want get more questions like(500, 1000, 1500...)")
+parser.add_argument('-n', '--num', type=int, required=False, help="Number of questions you want for the script(if you dont say any number, by defect will be 20 or 50)\nIn case of option req you must put a longer number if you want get more questions like(500, 1000, 1500...)")
 parser.add_argument('-h', '--help', action='help', help="Write -f or --func ['req', 'send'] to change the use of the script\nExample: python .\\test.py -f send")
 args = parser.parse_args()
 func_arg = args.func
