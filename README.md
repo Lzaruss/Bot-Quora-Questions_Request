@@ -14,12 +14,19 @@ The script also has a function called iniciar_sesion() that is used to log in to
 
 It also has a function called add_question() that adds a new question to the ask.txt file and a function called get_question() that reads the first line of the ask.txt file and removes it from the file. Additionally, it has a function called return_questions() that uses all these functions to collect the user's questions and write them to the ask.txt file.
 
-# EXAMPLE
+# EXAMPLE 1
 
+command -> python .\test.py -f req -n 150 
 
+In this case, I recommend use a number longer like 300 or higher, but the time will be more longer
+In a case I made for myself, with a scroll number of 2000, the bot gave me 2400 questions.
 
 https://user-images.githubusercontent.com/104428151/209848955-bebcec89-db29-44aa-9762-60e73273ff5e.mp4
 
+# EXAMPLE 2
 
+command -> python .\test.py -f send -n 50
+
+In this case, is better put a number lower like 50, the max i think is 110 approximately, because Quora requests are limited.
 
 https://user-images.githubusercontent.com/104428151/209850939-02fbb605-9e55-4d1e-a1c1-3e736e3fa229.mp4
