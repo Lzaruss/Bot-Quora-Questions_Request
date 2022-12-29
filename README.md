@@ -20,6 +20,7 @@ command -> python .\test.py -f req -n 150
 
 In this case, I recommend use a number longer like 300 or higher, but the time will be more longer
 In a case I made for myself, with a scroll number of 2000, the bot gave me 2400 questions.
+By default the number will be 50 (if you dont put the arg -n)
 
 https://user-images.githubusercontent.com/104428151/209848955-bebcec89-db29-44aa-9762-60e73273ff5e.mp4
 
@@ -28,5 +29,6 @@ https://user-images.githubusercontent.com/104428151/209848955-bebcec89-db29-44aa
 command -> python .\test.py -f send -n 50
 
 In this case, is better put a number lower like 50, the max i think is 110 approximately, because Quora requests are limited.
+By default the number will be 20 (if you dont put the arg -n)
 
 https://user-images.githubusercontent.com/104428151/209850939-02fbb605-9e55-4d1e-a1c1-3e736e3fa229.mp4
