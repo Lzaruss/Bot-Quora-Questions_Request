@@ -14,6 +14,8 @@ The script also has a function called iniciar_sesion() that is used to log in to
 
 It also has a function called add_question() that adds a new question to the ask.txt file and a function called get_question() that reads the first line of the ask.txt file and removes it from the file. Additionally, it has a function called return_questions() that uses all these functions to collect the user's questions and write them to the ask.txt file.
 
+One for thing, if the script fail at login you must comment the line 23, that will be press the login button, but if there is a captcha it will give you error. In that case comment the line and add some time so that you can hit the captcha manually.
+
 # EXAMPLE 1
 
 command -> python .\test.py -f req -n 150 
