@@ -7,10 +7,10 @@ import argparse
 
 parser = argparse.ArgumentParser(add_help=False, description="Write -f or --func ['req', 'send'] to change the use of the script")
 parser.add_argument('-f', '--func', type=str, choices=['req', 'send'], required=True, help="Option to know if you want to collect questions(req) or send requests(send)")
-parser.add_argument('-n', '--num', type=int, required=False, help="Number of questions you want for the script(if you dont say any number, by defect will be 20 or 50)\nIn case of option req you must put a longer number if you want get more questions like(500, 1000, 1500...)")
-parser.add_argument('-h', '--help', action='help', help="Write -f or --func ['req', 'send'] to change the use of the script\nExample: python .\\test.py -f send")
+parser.add_argument('-n', '--num', type=int, required=False, help="Number of questions you want for the script(if you dont say any number, in defect will be 10)\nIn case of option req you must put a longer number if you want get more questions like(500, 1000, 1500...)")
+parser.add_argument('-L', '--login', required=False, action='store_true', help="argument to log in manually (to bypass captha manually) ")
+parser.add_argument('-h', '--help', action='help', help="Write -f or --func ['req', 'send'] to change the use of the script\nExample: python .\\test.py -f send\nIf Login returns Captcha error put -L to login manually")
 args = parser.parse_args()
-func_arg = args.func
 
 def iniciar_sesion(driver):
     credentials = cred_return()
@@ -19,8 +19,12 @@ def iniciar_sesion(driver):
     time.sleep(0.5)
     driver.find_element(By.XPATH, '//*[@id="password"]').send_keys(credentials["password"])
 
-    time.sleep(0.5)
-    driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div[4]/button').click()
+    if args.login:
+        time.sleep(20)
+    else:
+        time.sleep(1)
+        driver.find_element(By.XPATH, '//*[@id="root"]/div/div[2]/div/div/div/div/div/div[2]/div[2]/div[4]/button').click()
+
 
 def cred_return():
     cred_file = open("./credentials.json", "r")
@@ -54,7 +58,7 @@ def get_question():
     return first_line
 
 def return_questions():
-  
+
   # Toma el tiempo de inicio
   start_time = time.perf_counter()
   options = webdriver.ChromeOptions() 
@@ -65,12 +69,13 @@ def return_questions():
   scroll_amount = 150
 
   # Número de veces que se va a hacer scroll
-
+  preventiveNegativeQuestions = lambda num: 50 if num <= 0 else num
   try:
     num_scrolls = args.num
+    num_scrolls = preventiveNegativeQuestions(num_scrolls)
   except:
     num_scrolls = 50
-  print(f"The script will take approximately {num_scrolls*0.4} seconds")
+  print(f"The script will take approximately {num_scrolls*0.4/60:.1f} minutes")
   # Hacer scroll hasta el final de la página
   for i in range(num_scrolls):
     # Ejecutar código JavaScript para hacer scroll
@@ -97,10 +102,10 @@ def return_questions():
           num+=1
   print(f"Num of questions add to file: {num}")
   end_time = time.perf_counter()
-  elapsed_time = end_time - start_time
+  elapsed_time = (end_time - start_time) / 60
 
   # Muestra el tiempo transcurrido
-  print(f"\nTime past: {elapsed_time:.2f} seconds")
+  print(f"\nTime past: {elapsed_time:.2f} minutes")
   exit()
 
 def request_question():
@@ -111,12 +116,21 @@ def request_question():
   driver.get("https://es.quora.com/")
 
   iniciar_sesion(driver)
-  time.sleep(2)
+
   try:
     num = args.num
+    preventiveNegativeQuestions = lambda num: 20 if num <= 0 else num
+    num = preventiveNegativeQuestions(num)
   except:
     num = 20
   print(f'Questions -> {num}')
+
+  try:
+    time.sleep(2)
+    driver.find_element(By.XPATH, '//*[@id="onetrust-accept-btn-handler"]').click()
+  except:
+    pass
+
   while num != 0:
     print(f'\rQuestion number: {num} ', end="")
     try:
@@ -137,14 +151,14 @@ def request_question():
     num -= 1
 
   end_time = time.perf_counter()
-  elapsed_time = end_time - start_time
+  elapsed_time = (end_time - start_time) / 60
   time.sleep(2)
   # Muestra el tiempo transcurrido
-  print(f"\nTime past: {elapsed_time:.2f} seconds")
+  print(f"\nTime past: {elapsed_time:.2f}  minutes")
   driver.close()
   exit()
 
-if func_arg == 'req':
+if args.func == 'req':
     return_questions()
-elif func_arg == 'send':
+elif args.func == 'send':
     request_question()
