@@ -140,7 +140,7 @@ def request_question():
       driver.get(url)
       time.sleep(1.4)
       
-      driver.find_element(By.XPATH, '//*[@id="mainContent"]/div[1]/div/div/div/div[2]/div/div/div/div[1]/button[3]').click()
+      driver.find_element(By.XPATH, '//*[@id="mainContent"]/div[1]/div/div/div/div[2]/div/div/div[1]/button[3]').click()
 
       time.sleep(4)
       for i in range(1, 19):
